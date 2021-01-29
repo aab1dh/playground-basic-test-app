@@ -5,7 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ApiService } from './services/api-service.service';
-
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/components.module').then((m) => m.ComponentsModule), data: {
+        preload: true
+      }
+  }
+];
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +21,7 @@ import { ApiService } from './services/api-service.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule
+    RouterModule.forRoot(routes),
   ],
   providers: [
     ApiService

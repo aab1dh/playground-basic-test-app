@@ -1,0 +1,102 @@
+<header>
+  <div>FHIR Project</div>
+  <button mat-stroked-button color="primary" routerLink="/home">
+    Go Back to Home
+  </button>
+</header>
+<content>
+  <div
+    style="
+      margin-top: 80px;
+      margin-bottom: 50px;
+      height: 89%;
+      text-align: center;
+    "
+  >
+    <form
+      #form="ngForm"
+      *ngIf="patientForm; else loader"
+      [formGroup]="patientForm"
+      (ngSubmit)="submitForm(form)"
+    >
+      <!-- <label [attr.for]="qns.fields.id">{{ qns.fields.text }}</label> -->
+      <ng-container *ngFor="let field of qns.fields">
+        <div [ngSwitch]="field.type">
+          <section
+            *ngSwitchCase="'group'"
+            [formGroupName]="'group' + field.linkId"
+          >
+            <ng-container *ngFor="let field of field.item">
+              <ng-container [ngSwitch]="field.type">
+                <label>{{ field.text }} </label>
+                <section>
+                  <input
+                    *ngSwitchCase="'string'"
+                    [formControlName]="'string' + field.linkId"
+                    [id]="'string' + field.linkId"
+                    type="text"
+                  />
+                </section>
+                <section>
+                  <input
+                    *ngSwitchCase="'date'"
+                    [formControlName]="'date' + field.linkId"
+                    [id]="'string' + field.linkId"
+                    type="text"
+                  />
+                </section>
+                <section *ngSwitchCase="'boolean'">
+                  <mat-radio-group
+                    [name]="'boolean' + field.linkId"
+                    [formControlName]="'boolean' + field.linkId"
+                  >
+                    <label>{{ field.text }} </label>
+                    <mat-radio-button class="mx-2" value="true">
+                      True
+                    </mat-radio-button>
+                    <mat-radio-button class="mx-2" value="false">
+                      False
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </section>
+              </ng-container>
+            </ng-container>
+          </section>
+
+          <section *ngSwitchCase="'boolean'">
+            <mat-radio-group
+              [name]="'boolean' + field.linkId"
+              [formControlName]="'boolean' + field.linkId"
+            >
+              <label>{{ field.text }} </label>
+              <mat-radio-button class="mx-2" value="true">
+                True
+              </mat-radio-button>
+              <mat-radio-button class="mx-2" value="false">
+                False
+              </mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </div>
+      </ng-container>
+
+      <div class="errorMessage" *ngIf="!form.valid">
+        {{ form.form.errors }}
+      </div>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="!form.valid"
+        type="submit"
+      >
+        Submit
+      </button>
+      {{ form.form.value | json }}
+    </form>
+
+    <ng-template #loader>
+      <div class="loader"></div>
+    </ng-template>
+  </div>
+</content>
+<footer><div>&copy; Copyright FHIR 2021</div></footer>

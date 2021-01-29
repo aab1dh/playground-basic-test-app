@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.loader {
+  z-index: 999;
+  transition: opacity 0.8s ease-in-out;
+  margin: 0 auto;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid blue;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear 30;
+  animation: spin 2s linear 30;
+  margin-top: 42vh;
+  will-change: transform;
+}
