@@ -1,0 +1,22 @@
+.header {
+  border-bottom: 1px solid black;
+  position: fixed;
+  width: 100vw;
+  background-color: antiquewhite;
+  height: 50px;
+  top: 0;
+}
+.container {
+  padding: 10%;
+}
+
+.heading {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
