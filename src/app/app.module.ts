@@ -4,12 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ApiService } from './services/api-service.service';
+
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/components.module').then((m) => m.ComponentsModule), data: {
+      import('./pages/pages.module').then((m) => m.PagesModule), data: {
         preload: true
       }
   }
@@ -22,9 +22,6 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-  ],
-  providers: [
-    ApiService
   ],
   bootstrap: [AppComponent]
 })

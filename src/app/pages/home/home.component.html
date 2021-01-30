@@ -7,7 +7,11 @@
 
 <content>
   <div>
-    <mat-table *ngIf="patientData; else loader" [dataSource]="patientData">
+    <mat-table
+      #table
+      *ngIf="patientData; else loader"
+      [dataSource]="patientData"
+    >
       <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
       <ng-container matColumnDef="id">

@@ -20,7 +20,7 @@
       (ngSubmit)="submitForm(form)"
     >
       <!-- <label [attr.for]="qns.fields.id">{{ qns.fields.text }}</label> -->
-      <ng-container *ngFor="let field of qns.fields">
+      <ng-container *ngFor="let field of qns.fields.item">
         <div [ngSwitch]="field.type">
           <section
             *ngSwitchCase="'group'"
@@ -92,6 +92,13 @@
         Submit
       </button>
       {{ form.form.value | json }}
+      <div height="100px"></div>
+      <h1 *ngIf="result">Response</h1>
+      <pre
+        style="text-align: left; margin-left: auto; margin-right: auto"
+        *ngIf="result"
+        >{{ result | json }}</pre
+      >
     </form>
 
     <ng-template #loader>

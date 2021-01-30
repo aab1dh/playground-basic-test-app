@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { share } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
 
   constructor(
@@ -13,7 +12,7 @@ export class ApiService {
 
   getPatients() {
     return this.httpClient.get(environment.queryURI + '/Patient',
-      { headers: this.getHeaders() });
+      { headers: this.getHeaders() }).pipe(share())
   }
 
   private getHeaders(): HttpHeaders {

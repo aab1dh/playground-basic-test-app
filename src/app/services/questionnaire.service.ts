@@ -4,7 +4,7 @@ import * as data from '../../assets/questionnaire.json';
   providedIn: 'root'
 })
 export class QuestionnaireService {
-  fields = (data as any).default.item;
+  fields = { ...(data as any).default };
   constructor() {
     // console.log(this.fields);
   }
