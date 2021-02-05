@@ -1,1 +1,48 @@
-{{ response | json }}
+<ng-container *ngIf="response">
+  <div style="display: flex; justify-content: center">
+    <div class="container">
+      <div style="line-height: 2rem">
+        <div>Response Type - {{ response?.resourceType }}</div>
+        <div>Date - {{ response?.date }}</div>
+        <div>Status - {{ response?.statu }}</div>
+      </div>
+      <!-- {{ response.item | json }} -->
+      <ng-container *ngFor="let item of response?.item">
+        <!-- <div>{{ item | json }}</div> -->
+
+        <div
+          [ngStyle]="{
+            'font-size': item?.type === 'group' ? '24px' : '14px',
+            'margin-bottom': item?.type === 'group' ? '24px' : '5px'
+          }"
+        >
+          {{ item?.text }}&nbsp;<span *ngIf="!(item?.type === 'group')">{{
+            item?.answer?.valueBoolean
+          }}</span>
+        </div>
+        <ng-container *ngIf="item?.type === 'group'">
+          <ng-container *ngFor="let item of item?.item">
+            <!-- {{ item | json }} -->
+            <div>
+              {{ item?.text }}&nbsp;<span>{{
+                item?.answer?.valueBoolean
+                  ? item?.answer?.valueBoolean
+                  : item?.answer?.valueString
+                  ? item?.answer?.valueString
+                  : item?.answer?.valueDate
+                  ? (item?.answer?.valueDate | date: "mediumDate")
+                  : null
+              }}</span>
+            </div>
+            <br />
+          </ng-container>
+        </ng-container>
+        <br />
+        <br />
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />
+<br />
+<br />

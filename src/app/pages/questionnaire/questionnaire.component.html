@@ -19,7 +19,7 @@
       [formGroup]="patientForm"
       (ngSubmit)="submitForm(form)"
     >
-      <!-- <label [attr.for]="qns.fields.id">{{ qns.fields.text }}</label> -->
+      <h1>{{ qns.fields.resourceType }}</h1>
       <ng-container *ngFor="let field of qns.fields.item">
         <div [ngSwitch]="field.type">
           <section
@@ -165,17 +165,16 @@
       >
         Submit
       </button>
-      {{ form.form.value | json }}
+      <!-- {{ form.form.value | json }} -->
       <div height="100px"></div>
-      <h1 *ngIf="result">Response</h1>
+      <!-- <h1 *ngIf="result">Response</h1> -->
       <!-- <pre
         style="text-align: left; margin-left: auto; margin-right: auto"
         *ngIf="result"
         >{{ result | json }}</pre
       > -->
-      <response [response]="result"></response>
     </form>
-
+    <response [response]="result"></response>
     <ng-template #loader>
       <div class="loader"></div>
     </ng-template>

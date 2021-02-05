@@ -16,7 +16,7 @@ export class QuestionnaireComponent implements OnInit, AfterViewInit {
   }
 
   async ngAfterViewInit(): Promise<void> {
-    setTimeout(() => {
+    setTimeout((() => {
       const group = {}
       this.qns.fields.item.forEach(field => {
         if (field.type === 'boolean') {
@@ -33,7 +33,7 @@ export class QuestionnaireComponent implements OnInit, AfterViewInit {
         }
       })
       this.patientForm = this.fb.group(group)
-    }, 500);
+    }).bind(this), 500);
   }
 
   async submitForm(result): Promise<void> {
@@ -78,6 +78,7 @@ export class QuestionnaireComponent implements OnInit, AfterViewInit {
 
       })
     })
+    console.log(res)
     this.result = res
 
   }

@@ -7,7 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResponseComponent implements OnInit {
   @Input() response
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
