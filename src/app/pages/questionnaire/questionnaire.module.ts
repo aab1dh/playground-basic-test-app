@@ -9,8 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { QuestionnaireRoutingModule } from './questionnaire.routing.module';
+import { QuestionnaireComponentsModule } from './components/components.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 const materialModules = [
-  MatButtonModule, MatRadioModule, MatCardModule, MatInputModule
+  MatButtonModule, MatRadioModule, MatCardModule, MatInputModule, MatFormFieldModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule
 ];
 
 @NgModule({
@@ -21,6 +28,7 @@ const materialModules = [
     SharedModule,
     RouterModule,
     QuestionnaireRoutingModule,
+    QuestionnaireComponentsModule,
   ],
   exports: [QuestionnaireComponent]
 })

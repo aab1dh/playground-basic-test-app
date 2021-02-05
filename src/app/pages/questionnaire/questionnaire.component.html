@@ -23,30 +23,97 @@
       <ng-container *ngFor="let field of qns.fields.item">
         <div [ngSwitch]="field.type">
           <section
+            style="
+              display: flex;
+              flex-direction: column;
+              max-width: 50%;
+              margin: 0 auto;
+            "
             *ngSwitchCase="'group'"
             [formGroupName]="'group' + field.linkId"
           >
+            {{ field.text }}
             <ng-container *ngFor="let field of field.item">
               <ng-container [ngSwitch]="field.type">
-                <label>{{ field.text }} </label>
-                <section>
+                <mat-form-field
+                  appearance="fill"
+                  *ngSwitchCase="'string'"
+                  class="example-full-width"
+                >
+                  <mat-label>{{ field.text }}</mat-label>
+
+                  <section>
+                    <mat-select
+                      matInput
+                      [formControlName]="'string' + field.linkId"
+                      [id]="'string' + field.linkId"
+                      type="text"
+                    >
+                      <ng-container
+                        *ngIf="field.text === 'What is your gender?'"
+                      >
+                        <mat-option
+                          *ngFor="let option of ['Male', 'Female']"
+                          [value]="option"
+                        >
+                          {{ option }}
+                        </mat-option>
+                      </ng-container>
+                      <ng-container
+                        *ngIf="field.text === 'What is your country of birth?'"
+                      >
+                        <mat-option
+                          *ngFor="let option of ['India', 'Canada']"
+                          [value]="option"
+                        >
+                          {{ option }}
+                        </mat-option>
+                      </ng-container>
+                      <ng-container
+                        *ngIf="field.text === 'What is your marital status?'"
+                      >
+                        <mat-option
+                          *ngFor="let option of ['Married', 'Unmarried']"
+                          [value]="option"
+                        >
+                          {{ option }}
+                        </mat-option>
+                      </ng-container>
+                    </mat-select>
+                    <!-- <input
+                      matInput
+                      [formControlName]="'string' + field.linkId"
+                      [id]="'string' + field.linkId"
+                      type="text"
+                    /> -->
+                  </section>
+                </mat-form-field>
+                <mat-form-field *ngSwitchCase="'date'" appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+
                   <input
-                    *ngSwitchCase="'string'"
-                    [formControlName]="'string' + field.linkId"
-                    [id]="'string' + field.linkId"
-                    type="text"
-                  />
-                </section>
-                <section>
-                  <input
-                    *ngSwitchCase="'date'"
+                    matInput
+                    [matDatepicker]="picker"
                     [formControlName]="'date' + field.linkId"
                     [id]="'string' + field.linkId"
                     type="text"
                   />
-                </section>
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <section *ngSwitchCase="'boolean'">
-                  <mat-radio-group
+                  <mat-checkbox
+                    labelPosition="before"
+                    [name]="'boolean' + field.linkId"
+                    [formControlName]="'boolean' + field.linkId"
+                    class="example-margin"
+                    >{{ field.text }}
+                  </mat-checkbox>
+
+                  <!-- <mat-radio-group
                     [name]="'boolean' + field.linkId"
                     [formControlName]="'boolean' + field.linkId"
                   >
@@ -57,14 +124,21 @@
                     <mat-radio-button class="mx-2" value="false">
                       False
                     </mat-radio-button>
-                  </mat-radio-group>
+                  </mat-radio-group> -->
                 </section>
               </ng-container>
             </ng-container>
           </section>
 
           <section *ngSwitchCase="'boolean'">
-            <mat-radio-group
+            <mat-checkbox
+              labelPosition="before"
+              [name]="'boolean' + field.linkId"
+              [formControlName]="'boolean' + field.linkId"
+              class="example-margin"
+              >{{ field.text }}
+            </mat-checkbox>
+            <!-- <mat-radio-group
               [name]="'boolean' + field.linkId"
               [formControlName]="'boolean' + field.linkId"
             >
@@ -75,7 +149,7 @@
               <mat-radio-button class="mx-2" value="false">
                 False
               </mat-radio-button>
-            </mat-radio-group>
+            </mat-radio-group> -->
           </section>
         </div>
       </ng-container>
@@ -94,11 +168,12 @@
       {{ form.form.value | json }}
       <div height="100px"></div>
       <h1 *ngIf="result">Response</h1>
-      <pre
+      <!-- <pre
         style="text-align: left; margin-left: auto; margin-right: auto"
         *ngIf="result"
         >{{ result | json }}</pre
-      >
+      > -->
+      <response [response]="result"></response>
     </form>
 
     <ng-template #loader>

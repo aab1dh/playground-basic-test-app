@@ -11,19 +11,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
   patientData: MatTableDataSource<any>;
   tableColumns: string[] = ['id', 'gender', 'resourceType'];
   constructor(private apiService: ApiService) {
-    setTimeout(() => {
-      this.apiService.getPatients()
-        .pipe(tap(console.log), take(1), map((data: any) => data.entry.map((entry: any) => entry.resource)))
-        .pipe(tap(console.log))
-        .subscribe((data: any) => this.patientData = new MatTableDataSource(data))
-    }, 0);
+
   }
 
   ngOnInit(): void {
   }
 
-  ngAfterViewInit(): void {
-
+  async ngAfterViewInit(): Promise<void> {
+    await this.apiService.getPatients()
+      .pipe(tap(console.log), take(1), map((data: any) => data.entry.map((entry: any) => entry.resource)))
+      .pipe(tap(console.log))
+      .subscribe((data: any) => this.patientData = new MatTableDataSource(data))
 
   }
 
